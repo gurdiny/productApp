@@ -1,7 +1,11 @@
 const createproductCard = (productObject) => {
-  let { name, image, description, price } = productObject;
+  let { name, image, description, price, key } = productObject;
 
-  // Crear elementos del DOM
+  // Crear el enlace dinámico
+  const link = document.createElement("a");
+  link.href = `../views/detalles.html?productKey=${key}`;
+
+  // Crear elementos del DOM para la tarjeta del producto
   const colDiv = document.createElement("div");
   colDiv.classList.add("col");
 
@@ -40,7 +44,7 @@ const createproductCard = (productObject) => {
   descriptionLi.classList.add("list-group-item");
   descriptionLi.textContent = `Descripción: ${description}`;
 
-  // Construir la estructura del DOM
+  // Construir la estructura del DOM de la tarjeta del producto
   colDiv.appendChild(cardDiv);
   cardDiv.appendChild(rowDiv);
   rowDiv.appendChild(imageColDiv);
@@ -52,7 +56,10 @@ const createproductCard = (productObject) => {
   ul.appendChild(priceLi);
   ul.appendChild(descriptionLi);
 
-  return colDiv;
+  // Agregar todo al enlace
+  link.appendChild(colDiv);
+
+  return link;
 };
 
 const fetchAllproducts = async () => {
